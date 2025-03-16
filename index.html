@@ -195,6 +195,11 @@
                 return;
             }
             
+            if (sceneData.isSuccess) {
+                renderSuccess();
+                return;
+            }
+            
             sceneData.choices.forEach(choice => {
                 const button = document.createElement("button");
                 button.className = "choice-btn";
@@ -210,6 +215,20 @@
             restartButton.className = "restart-btn";
             restartButton.textContent = "Restart Game";
             restartButton.onclick = restartGame;
+            choicesContainer.appendChild(restartButton);
+        }
+        
+        function renderSuccess() {
+            const choicesContainer = document.getElementById("choices");
+            const successElement = document.createElement("div");
+            successElement.className = "success";
+            
+            const restartButton = document.createElement("button");
+            restartButton.className = "restart-btn";
+            restartButton.textContent = "Play Again";
+            restartButton.onclick = restartGame;
+            
+            choicesContainer.appendChild(successElement);
             choicesContainer.appendChild(restartButton);
         }
         
