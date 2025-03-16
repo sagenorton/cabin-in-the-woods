@@ -96,85 +96,59 @@
         
         const scenes = {
             start: {
-                description: "You find yourself in a mysterious place. What will you do?",
+                description: "You find yourself in a mysterious cabin in the woods. Which direction to take?",
                 image: "start.jpg",
                 choices: [
-                    { text: "Explore the area", nextScene: "path1" },
-                    { text: "Sit and wait", nextScene: "path2" }
+                    { text: "Left path", nextScene: "puzzleBox" },
+                    { text: "Straight ahead", nextScene: "videoTape" },
+                    { text: "Right path", nextScene: "spellBook" }
                 ]
             },
-            path1: {
-                description: "You explore and find a fork in the road.",
+            puzzleBox: {
+                description: "Puzzle Box.",
                 image: "path1.jpg",
                 choices: [
-                    { text: "Take the left path", nextScene: "path1A" },
-                    { text: "Take the right path", nextScene: "path1B" },
-                    { text: "Climb a tree for a better view", nextScene: "path1C" }
+                    { text: "Solve the puzzle box", nextScene: "pinhead" },
+                    { text: "Leave it, go past", nextScene: "graveyard" }
                 ]
             },
-            path1A: { description: "You step into quicksand. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
-            path1B: { description: "You find an old bridge.", image: "path1B.jpg", choices: [
-                { text: "Cross the bridge", nextScene: "path1B1" },
-                { text: "Find another way", nextScene: "path1B2" }
+            pinhead: { description: "You got killed. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
+            graveyard: { description: "You find a graveyard, which direction from here?", image: "path1B.jpg", choices: [
+                { text: "Left", nextScene: "jason" },
+                { text: "Right", nextScene: "evilBook" }
             ]},
-            path1B1: { description: "The bridge collapses. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
-            path1B2: { description: "You find a hidden tunnel.", image: "path1B2.jpg", choices: [
-                { text: "Enter the tunnel", nextScene: "path1B2A" },
-                { text: "Go back", nextScene: "path1" }
+            jason: { description: "You got killed. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
+            evilBook: { description: "You find an evil book.", image: "path1B2.jpg", choices: [
+                { text: "go past", nextScene: "chainsaw" },
+                { text: "use the book", nextScene: "babadook" }
             ]},
-            path1B2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            babadook: { description: "You got killed. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
             
-            path1C: { description: "You climb a tree and spot movement below.", image: "path1C.jpg", choices: [
-                { text: "Climb down and investigate", nextScene: "path1C1" },
-                { text: "Stay hidden and observe", nextScene: "path1C2" }
+            videoTape: { description: "You find a videotape.", image: "path1C.jpg", choices: [
+                { text: "go past", nextScene: "ouijaBoard" },
+                { text: "watch the tape", nextScene: "samara" }
             ]},
-            path1C1: { description: "A wild animal attacks you. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            path1C2: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
-                { text: "Approach the figure", nextScene: "path1C2A" },
-                { text: "Stay hidden", nextScene: "path1C2B" }
-            ]},
-            path1C2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
-            path1C2B: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
-                { text: "Approach the figure", nextScene: "path1C2B1" },
-                { text: "Stay hidden", nextScene: "success" }
-            ]},
-            path1C2B1: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
-            path2: {
-                description: "You explore and find a fork in the road.",
-                image: "path1.jpg",
-                choices: [
-                    { text: "Take the left path", nextScene: "path2A" },
-                    { text: "Take the right path", nextScene: "path2B" },
-                    { text: "Climb a tree for a better view", nextScene: "path2C" }
-                ]
-            },
-            path2C: { description: "You step into quicksand. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
-            path2B: { description: "You find an old bridge.", image: "path1B.jpg", choices: [
-                { text: "Cross the bridge", nextScene: "path2B1" },
-                { text: "Find another way", nextScene: "path2B2" }
-            ]},
-            path2B1: { description: "The bridge collapses. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
-            path2B2: { description: "You find a hidden tunnel.", image: "path1B2.jpg", choices: [
-                { text: "Enter the tunnel", nextScene: "path2B2A" },
-                { text: "Go back", nextScene: "path2" }
-            ]},
-            path2B2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            samara: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
             
-            path2A: { description: "You climb a tree and spot movement below.", image: "path1C.jpg", choices: [
-                { text: "Climb down and investigate", nextScene: "path2A1" },
-                { text: "Stay hidden and observe", nextScene: "path2A2" }
+            ouijaBoard: { description: "You find an ouija board.", image: "path1D.jpg", choices: [
+                { text: "use the board", nextScene: "freddy" },
+                { text: "go past", nextScene: "evilBook" }
             ]},
-            path2A1: { description: "A wild animal attacks you. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            path2A2: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
-                { text: "Approach the figure", nextScene: "path2A2A" },
-                { text: "Stay hidden", nextScene: "path2A2B" }
+            chainsaw: { description: "You hear a chainsaw but dont know where it's coming from.", image: "path1D.jpg", choices: [
+                { text: "left", nextScene: "success" },
+                { text: "right", nextScene: "leatherface" }
             ]},
-            path2A2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
-            path2A2B: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
-                { text: "Approach the figure", nextScene: "path2A2B1" },
-                { text: "Stay hidden", nextScene: "success" }
+            leatherface: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
+            spellBook: { description: "You find a spell book.", image: "path1D.jpg", choices: [
+                { text: "go past", nextScene: "trapDoor" },
+                { text: "read it", nextScene: "regan" }
             ]},
-            path2A2B1: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            regan: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
+            trapDoor: { description: "You find a trap door.", image: "path1D.jpg", choices: [
+                { text: "go inside", nextScene: "evilBook" },
+                { text: "go past", nextScene: "pennywise" }
+            ]},
+            pennywise: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
             success: {
                 description: "Congratulations! You have successfully completed your adventure!",
                 image: "success.jpg",
