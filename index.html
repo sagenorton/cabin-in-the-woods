@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Adventure Game</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .game-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 15px;
+        }
+        .scene-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .scene-image {
+            width: 40%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .scene-content {
+            width: 60%;
+        }
+        .scene-description {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .choice-btn, .restart-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .choice-btn:hover, .restart-btn:hover {
+            background-color: #2980b9;
+        }
+        .game-over {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .success {
+            color: #2ecc71;
+            font-weight: bold;
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>CABIN IN THE WOODS</h1>
+        <div id="scene-container" class="scene-container">
+            <img id="scene-image" class="scene-image" src="" alt="Scene Image">
+            <div class="scene-content">
+                <p id="scene-description" class="scene-description"></p>
+                <div id="choices" class="choices"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const gameState = {
+            currentScene: "start"
+        };
+        
+        const scenes = {
+            start: {
+                description: "You find yourself in a mysterious place. What will you do?",
+                image: "start.jpg",
+                choices: [
+                    { text: "Explore the area", nextScene: "path1" },
+                    { text: "Sit and wait", nextScene: "path2" }
+                ]
+            },
+            path1: {
+                description: "You explore and find a fork in the road.",
+                image: "path1.jpg",
+                choices: [
+                    { text: "Take the left path", nextScene: "path1A" },
+                    { text: "Take the right path", nextScene: "path1B" },
+                    { text: "Climb a tree for a better view", nextScene: "path1C" }
+                ]
+            },
+            path1A: { description: "You step into quicksand. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
+            path1B: { description: "You find an old bridge.", image: "path1B.jpg", choices: [
+                { text: "Cross the bridge", nextScene: "path1B1" },
+                { text: "Find another way", nextScene: "path1B2" }
+            ]},
+            path1B1: { description: "The bridge collapses. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
+            path1B2: { description: "You find a hidden tunnel.", image: "path1B2.jpg", choices: [
+                { text: "Enter the tunnel", nextScene: "path1B2A" },
+                { text: "Go back", nextScene: "path1" }
+            ]},
+            path1B2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            
+            path1C: { description: "You climb a tree and spot movement below.", image: "path1C.jpg", choices: [
+                { text: "Climb down and investigate", nextScene: "path1C1" },
+                { text: "Stay hidden and observe", nextScene: "path1C2" }
+            ]},
+            path1C1: { description: "A wild animal attacks you. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
+            path1C2: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
+                { text: "Approach the figure", nextScene: "path1C2A" },
+                { text: "Stay hidden", nextScene: "path1C2B" }
+            ]},
+            path1C2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            path1C2B: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
+                { text: "Approach the figure", nextScene: "path1C2B1" },
+                { text: "Stay hidden", nextScene: "success" }
+            ]},
+            path1C2B1: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            path2: {
+                description: "You explore and find a fork in the road.",
+                image: "path1.jpg",
+                choices: [
+                    { text: "Take the left path", nextScene: "path2A" },
+                    { text: "Take the right path", nextScene: "path2B" },
+                    { text: "Climb a tree for a better view", nextScene: "path2C" }
+                ]
+            },
+            path2C: { description: "You step into quicksand. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
+            path2B: { description: "You find an old bridge.", image: "path1B.jpg", choices: [
+                { text: "Cross the bridge", nextScene: "path2B1" },
+                { text: "Find another way", nextScene: "path2B2" }
+            ]},
+            path2B1: { description: "The bridge collapses. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
+            path2B2: { description: "You find a hidden tunnel.", image: "path1B2.jpg", choices: [
+                { text: "Enter the tunnel", nextScene: "path2B2A" },
+                { text: "Go back", nextScene: "path2" }
+            ]},
+            path2B2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            
+            path2A: { description: "You climb a tree and spot movement below.", image: "path1C.jpg", choices: [
+                { text: "Climb down and investigate", nextScene: "path2A1" },
+                { text: "Stay hidden and observe", nextScene: "path2A2" }
+            ]},
+            path2A1: { description: "A wild animal attacks you. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
+            path2A2: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
+                { text: "Approach the figure", nextScene: "path2A2A" },
+                { text: "Stay hidden", nextScene: "path2A2B" }
+            ]},
+            path2A2A: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            path2A2B: { description: "You see a mysterious figure and must decide what to do next.", image: "path1C2.jpg", choices: [
+                { text: "Approach the figure", nextScene: "path2A2B1" },
+                { text: "Stay hidden", nextScene: "success" }
+            ]},
+            path2A2B1: { description: "A rockslide traps you. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
+            success: {
+                description: "Congratulations! You have successfully completed your adventure!",
+                image: "success.jpg",
+                choices: [],
+                isSuccess: true
+            }
+        };
+        
+        function renderScene() {
+            const sceneData = scenes[gameState.currentScene];
+            document.getElementById("scene-description").textContent = sceneData.description;
+            document.getElementById("scene-image").src = sceneData.image;
+            const choicesContainer = document.getElementById("choices");
+            choicesContainer.innerHTML = "";
+            
+            if (sceneData.isGameOver) {
+                renderGameOver();
+                return;
+            }
+            
+            sceneData.choices.forEach(choice => {
+                const button = document.createElement("button");
+                button.className = "choice-btn";
+                button.textContent = choice.text;
+                button.onclick = () => makeChoice(choice.nextScene);
+                choicesContainer.appendChild(button);
+            });
+        }
+        
+        function renderGameOver() {
+            const choicesContainer = document.getElementById("choices");
+            const restartButton = document.createElement("button");
+            restartButton.className = "restart-btn";
+            restartButton.textContent = "Restart Game";
+            restartButton.onclick = restartGame;
+            choicesContainer.appendChild(restartButton);
+        }
+        
+        function makeChoice(nextScene) {
+            gameState.currentScene = nextScene;
+            renderScene();
+        }
+        
+        function restartGame() {
+            gameState.currentScene = "start";
+            renderScene();
+        }
+        
+        renderScene();
+    </script>
+</body>
+</html>
+
