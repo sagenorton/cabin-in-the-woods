@@ -95,67 +95,129 @@
         };
         
         const scenes = {
-            start: {
-                description: "You find yourself in a mysterious cabin in the woods. Which direction to take?",
-                image: "start.jpg",
-                choices: [
-                    { text: "Left path", nextScene: "puzzleBox" },
-                    { text: "Straight ahead", nextScene: "videoTape" },
-                    { text: "Right path", nextScene: "spellBook" }
-                ]
-            },
-            puzzleBox: {
-                description: "Puzzle Box.",
-                image: "path1.jpg",
-                choices: [
-                    { text: "Solve the puzzle box", nextScene: "pinhead" },
-                    { text: "Leave it, go past", nextScene: "graveyard" }
-                ]
-            },
-            pinhead: { description: "You got killed. Game Over.", image: "path1A.jpg", choices: [], isGameOver: true },
-            graveyard: { description: "You find a graveyard, which direction from here?", image: "path1B.jpg", choices: [
-                { text: "Left", nextScene: "jason" },
-                { text: "Right", nextScene: "evilBook" }
-            ]},
-            jason: { description: "You got killed. Game Over.", image: "path1B1.jpg", choices: [], isGameOver: true },
-            evilBook: { description: "You find an evil book.", image: "path1B2.jpg", choices: [
-                { text: "go past", nextScene: "chainsaw" },
-                { text: "use the book", nextScene: "babadook" }
-            ]},
-            babadook: { description: "You got killed. Game Over.", image: "path1B2A.jpg", choices: [], isGameOver: true },
-            
-            videoTape: { description: "You find a videotape.", image: "path1C.jpg", choices: [
-                { text: "go past", nextScene: "ouijaBoard" },
-                { text: "watch the tape", nextScene: "samara" }
-            ]},
-            samara: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            
-            ouijaBoard: { description: "You find an ouija board.", image: "path1D.jpg", choices: [
-                { text: "use the board", nextScene: "freddy" },
-                { text: "go past", nextScene: "evilBook" }
-            ]},
-            chainsaw: { description: "You hear a chainsaw but dont know where it's coming from.", image: "path1D.jpg", choices: [
-                { text: "left", nextScene: "success" },
-                { text: "right", nextScene: "leatherface" }
-            ]},
-            leatherface: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            spellBook: { description: "You find a spell book.", image: "path1D.jpg", choices: [
-                { text: "go past", nextScene: "trapDoor" },
-                { text: "read it", nextScene: "regan" }
-            ]},
-            regan: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            trapDoor: { description: "You find a trap door.", image: "path1D.jpg", choices: [
-                { text: "go inside", nextScene: "evilBook" },
-                { text: "go past", nextScene: "pennywise" }
-            ]},
-            pennywise: { description: "You got killed. Game Over.", image: "path1C1.jpg", choices: [], isGameOver: true },
-            success: {
-                description: "Congratulations! You have successfully completed your adventure!",
-                image: "success.jpg",
-                choices: [],
-                isSuccess: true
-            }
-        };
+    start: {
+        description: "The wind howls through the trees as you awaken inside a decayed, candlelit cabin. The air is thick with the scent of damp wood and something... rotten. The door creaks open, revealing three paths—each disappearing into the darkness of the unknown. Which way will you go?",
+        image: "start.jpg",
+        choices: [
+            { text: "Take the shadowy left path", nextScene: "puzzleBox" },
+            { text: "Step straight into the ominous clearing", nextScene: "videoTape" },
+            { text: "Venture down the twisted right trail", nextScene: "spellBook" }
+        ]
+    },
+    puzzleBox: {
+        description: "A strange, ornate puzzle box sits on a tree stump, its intricate carvings pulsing under the moonlight. A whisper slithers through the air, beckoning you to solve it. Do you dare?",
+        image: "path1.jpg",
+        choices: [
+            { text: "Turn the puzzle’s pieces", nextScene: "pinhead" },
+            { text: "Ignore it and press forward", nextScene: "graveyard" }
+        ]
+    },
+    pinhead: { 
+        description: "The moment the puzzle clicks into place, chains lash out from the darkness, hooking into your flesh. A deep, guttural voice murmurs, 'Welcome to eternity.' The pain is unimaginable. You are torn apart. Game Over.", 
+        image: "path1A.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    graveyard: {
+        description: "Mist clings to the ground as you step into an overgrown graveyard. Tombstones lean at odd angles, their inscriptions worn away. Something stirs between the graves, unseen but very much aware of your presence. Which way do you go?",
+        image: "path1B.jpg",
+        choices: [
+            { text: "Turn left toward the rustling trees", nextScene: "jason" },
+            { text: "Move right towards a flickering lantern", nextScene: "evilBook" }
+        ]
+    },
+    jason: { 
+        description: "The crunch of a heavy boot behind you is the last sound you hear. Cold steel pierces your chest. A hockey mask stares down as everything fades to black. Game Over.", 
+        image: "path1B1.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    evilBook: {
+        description: "A book bound in what looks like human skin sits atop an altar, its pages fluttering despite the still air. Faint whispers echo in your ears, urging you to read. Do you heed the call?",
+        image: "path1B2.jpg",
+        choices: [
+            { text: "Step away from the cursed tome", nextScene: "fog" },
+            { text: "Open the book and read", nextScene: "babadook" }
+        ]
+    },
+    babadook: { 
+        description: "The moment your eyes scan the words, shadows slither from the pages, wrapping around you. The last thing you see is a sinister, grinning figure. Game Over.", 
+        image: "path1B2A.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    videoTape: {
+        description: "A dust-covered VHS tape sits in the middle of the path, its label faded and unreadable. A nearby, half-buried TV flickers to life with static. Do you dare watch?",
+        image: "path1C.jpg",
+        choices: [
+            { text: "Ignore the tape and move on", nextScene: "ouijaBoard" },
+            { text: "Pick up the tape and watch it", nextScene: "samara" }
+        ]
+    },
+    samara: { 
+        description: "The screen goes black, then a well appears. A girl with soaked hair crawls out—towards you. The last thing you hear is your own scream. Game Over.", 
+        image: "path1C1.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    ouijaBoard: {
+        description: "An old wooden Ouija board lies open on a mossy table. The planchette moves slightly as if eager to spell something. A chill runs down your spine. Do you reach out?",
+        image: "path1D.jpg",
+        choices: [
+            { text: "Place your fingers on the board", nextScene: "freddy" },
+            { text: "Step away and continue forward", nextScene: "evilBook" }
+        ]
+    },
+    fog: {
+        description: "The trees thin out, giving way to a swirling, unnatural fog. Something stirs within it. One path leads to safety, the other... to your doom. Choose wisely.",
+        image: "path1D.jpg",
+        choices: [
+            { text: "Take the left path", nextScene: "success" },
+            { text: "Take the right path", nextScene: "leatherface" }
+        ]
+    },
+    leatherface: { 
+        description: "A deafening chainsaw roars to life. A hulking figure charges through the fog. You don’t have time to run. Game Over.", 
+        image: "path1C1.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    spellBook: {
+        description: "An aged, leather-bound spellbook sits on a stone pedestal, its pages covered in indecipherable symbols. The air crackles with dark energy. Do you dare open it?",
+        image: "path1D.jpg",
+        choices: [
+            { text: "Turn away from the book", nextScene: "trapDoor" },
+            { text: "Read the forbidden text", nextScene: "regan" }
+        ]
+    },
+    regan: { 
+        description: "A violent force slams into you, pinning you against the trees. You feel your body contort in unnatural ways as an unholy presence takes over. Game Over.", 
+        image: "path1C1.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    trapDoor: {
+        description: "Half-buried in the dirt is a rusted trap door. Faint scratching sounds echo from below. The handle is slick with something wet. Will you descend?",
+        image: "path1D.jpg",
+        choices: [
+            { text: "Climb down into the darkness", nextScene: "evilBook" },
+            { text: "Walk past it and keep moving", nextScene: "pennywise" }
+        ]
+    },
+    pennywise: { 
+        description: "A red balloon drifts toward you. Before you can react, a clawed hand drags you into the darkness. Game Over.", 
+        image: "path1C1.jpg", 
+        choices: [], 
+        isGameOver: true 
+    },
+    success: {
+        description: "The dense forest fades behind you as the trees give way to an open path. In the distance, the faint glow of a nearby town guides your way. You’ve made it out of the woods, for now...",
+        image: "success.jpg",
+        choices: [],
+        isSuccess: true
+    }
+};
+
         
         function renderScene() {
             const sceneData = scenes[gameState.currentScene];
