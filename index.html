@@ -6,21 +6,20 @@
     <title>Text Adventure Game</title>
     <style>
         body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "montserrat", sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: black;
+            color: #fff;
         }
         .game-container {
-            background-color: white;
+            background-color: black;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #2c3e50;
+            color: #f5f5f5;
             text-align: center;
             border-bottom: 2px solid #ecf0f1;
             padding-bottom: 15px;
@@ -31,16 +30,16 @@
             gap: 20px;
         }
         .scene-image {
-            width: 40%;
-            max-width: 300px;
-            height: auto;
+            width: 25vw;
+            height: 25vw;
+            object-fit: contain;
             border-radius: 10px;
         }
         .scene-content {
             width: 60%;
         }
         .scene-description {
-            font-size: 18px;
+            font-size: .95rem;
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -49,33 +48,72 @@
             flex-direction: column;
             gap: 15px;
         }
-        .choice-btn, .restart-btn {
-            background-color: #3498db;
-            color: white;
+        .choice-btn {
+            background-color: #cdcdcd;
+            color: black;
             border: none;
             border-radius: 5px;
             padding: 12px 20px;
-            font-size: 16px;
+            font-size: .9rem;
+            font-weight: semibold;
+            font-family: "montserrat", sans-serif;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .choice-btn:hover, .restart-btn:hover {
-            background-color: #2980b9;
+        .choice-btn:hover {
+            background-color: #fff;
         }
-        .game-over {
-            color: #e74c3c;
-            font-weight: bold;
-            text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-        }
-        .success {
-            color: #2ecc71;
-            font-weight: bold;
-            text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-        }
+    .game-over-text {
+        color: #e74c3c;
+        font-weight: medium;
+        text-align: center;
+        font-size: 1rem;
+        margin: 20px 0;
+    }
+
+    .game-over-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 12px 20px;
+        font-size: .9rem;
+        font-weight: semibold;
+        font-family: "montserrat", sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .game-over-btn:hover {
+        background-color: #902c20;
+    }
+
+    .success-text {
+        color: #2ecc71;
+        font-weight: medium;
+        text-align: center;
+        font-size: 1rem;
+        margin: 20px 0;
+    }
+
+    .success-btn {
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 12px 20px;
+        font-size: .9rem;
+        font-weight: semibold;
+        font-family: "montserrat", sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .success-btn:hover {
+        background-color: #1a7540;
+    }
+
+
     </style>
 </head>
 <body>
@@ -96,8 +134,8 @@
         
         const scenes = {
     start: {
-        description: "The wind howls through the trees as you awaken inside a decayed, candlelit cabin. The air is thick with the scent of damp wood and something... rotten. The door creaks open, revealing three paths—each disappearing into the darkness of the unknown. Which way will you go?",
-        image: "start.jpg",
+        description: "The wind howls through the trees as you awaken inside a decayed, candlelit cabin. The air is thick with the scent of damp wood and something... rotten. The door creaks open, revealing three paths—each disappearing into the darkness of the unknown. <br><br><b>Which way will you go?</b>",
+        image: "assets/cabin.png",
         choices: [
             { text: "Take the shadowy left path", nextScene: "puzzleBox" },
             { text: "Step straight into the ominous clearing", nextScene: "videoTape" },
@@ -105,168 +143,185 @@
         ]
     },
     puzzleBox: {
-        description: "A strange, ornate puzzle box sits on a tree stump, its intricate carvings pulsing under the moonlight. A whisper slithers through the air, beckoning you to solve it. Do you dare?",
-        image: "path1.jpg",
+        description: "A strange, ornate puzzle box sits on a tree stump, its intricate carvings pulsing under the moonlight. A whisper slithers through the air, beckoning you to solve it. <br><br><b>Do you dare?</b>",
+        image: "assets/puzzleBox.png",
         choices: [
             { text: "Turn the puzzle’s pieces", nextScene: "pinhead" },
             { text: "Ignore it and press forward", nextScene: "graveyard" }
         ]
     },
     pinhead: { 
-        description: "The moment the puzzle clicks into place, chains lash out from the darkness, hooking into your flesh. A deep, guttural voice murmurs, 'Welcome to eternity.' The pain is unimaginable. You are torn apart. Game Over.", 
-        image: "path1A.jpg", 
+        description: "The moment the puzzle clicks into place, chains lash out from the darkness, hooking into your flesh. A deep, guttural voice murmurs, 'Welcome to eternity.' The pain is unimaginable. You are torn apart. <br><br><b>Game Over.</b>", 
+        image: "assets/pinhead.png", 
         choices: [], 
         isGameOver: true 
     },
     graveyard: {
-        description: "Mist clings to the ground as you step into an overgrown graveyard. Tombstones lean at odd angles, their inscriptions worn away. Something stirs between the graves, unseen but very much aware of your presence. Which way do you go?",
-        image: "path1B.jpg",
+        description: "Mist clings to the ground as you step into an overgrown graveyard. Tombstones lean at odd angles, their inscriptions worn away. Something stirs between the graves, unseen but very much aware of your presence. <br><br><b>Which way do you go?</b>",
+        image: "assets/graveyard.png",
         choices: [
             { text: "Turn left toward the rustling trees", nextScene: "jason" },
             { text: "Move right towards a flickering lantern", nextScene: "evilBook" }
         ]
     },
     jason: { 
-        description: "The crunch of a heavy boot behind you is the last sound you hear. Cold steel pierces your chest. A hockey mask stares down as everything fades to black. Game Over.", 
-        image: "path1B1.jpg", 
+        description: "The crunch of a heavy boot behind you is the last sound you hear. Cold steel pierces your chest. A hockey mask stares down as everything fades to black. <br><br><b>Game Over.</b>", 
+        image: "assets/jason.png", 
         choices: [], 
         isGameOver: true 
     },
     evilBook: {
-        description: "A book bound in what looks like human skin sits atop an altar, its pages fluttering despite the still air. Faint whispers echo in your ears, urging you to read. Do you heed the call?",
-        image: "path1B2.jpg",
+        description: "A book bound in what looks like human skin sits atop an altar, its pages fluttering despite the still air. Faint whispers echo in your ears, urging you to read. <br><br><b>Do you heed the call?</b>",
+        image: "assets/evilBook.png",
         choices: [
             { text: "Step away from the cursed tome", nextScene: "fog" },
             { text: "Open the book and read", nextScene: "babadook" }
         ]
     },
     babadook: { 
-        description: "The moment your eyes scan the words, shadows slither from the pages, wrapping around you. The last thing you see is a sinister, grinning figure. Game Over.", 
-        image: "path1B2A.jpg", 
+        description: "The moment your eyes scan the words, shadows slither from the pages, wrapping around you. The last thing you see is a sinister, grinning figure. <br><br><b>Game Over.</b>", 
+        image: "assets/babadook.png", 
         choices: [], 
         isGameOver: true 
     },
     videoTape: {
-        description: "A dust-covered VHS tape sits in the middle of the path, its label faded and unreadable. A nearby, half-buried TV flickers to life with static. Do you dare watch?",
-        image: "path1C.jpg",
+        description: "A dust-covered VHS tape sits in the middle of the path, its label faded and unreadable. A nearby, half-buried TV flickers to life with static. <br><br><b>Do you dare watch?</b>",
+        image: "assets/videoTape.png",
         choices: [
             { text: "Ignore the tape and move on", nextScene: "ouijaBoard" },
             { text: "Pick up the tape and watch it", nextScene: "samara" }
         ]
     },
     samara: { 
-        description: "The screen goes black, then a well appears. A girl with soaked hair crawls out—towards you. The last thing you hear is your own scream. Game Over.", 
-        image: "path1C1.jpg", 
+        description: "The screen goes black, then a well appears. A girl with soaked hair crawls out—towards you. The last thing you hear is your own scream. <br><br><b>Game Over.</b>", 
+        image: "assets/samara.png", 
         choices: [], 
         isGameOver: true 
     },
     ouijaBoard: {
-        description: "An old wooden Ouija board lies open on a mossy table. The planchette moves slightly as if eager to spell something. A chill runs down your spine. Do you reach out?",
-        image: "path1D.jpg",
+        description: "An old wooden Ouija board lies open on a mossy table. The planchette moves slightly as if eager to spell something. A chill runs down your spine. <br><br><b>Do you reach out?</b>",
+        image: "assets/ouijaBoard.png",
         choices: [
             { text: "Place your fingers on the board", nextScene: "freddy" },
             { text: "Step away and continue forward", nextScene: "evilBook" }
         ]
     },
     fog: {
-        description: "The trees thin out, giving way to a swirling, unnatural fog. Something stirs within it. One path leads to safety, the other... to your doom. Choose wisely.",
-        image: "path1D.jpg",
+        description: "The trees thin out, giving way to a swirling, unnatural fog. Something stirs within it. One path leads to safety, the other... to your doom. <br><br><b>Choose wisely.</b>",
+        image: "assets/fog.png",
         choices: [
             { text: "Take the left path", nextScene: "success" },
             { text: "Take the right path", nextScene: "leatherface" }
         ]
     },
     leatherface: { 
-        description: "A deafening chainsaw roars to life. A hulking figure charges through the fog. You don’t have time to run. Game Over.", 
-        image: "path1C1.jpg", 
+        description: "A deafening chainsaw roars to life. A hulking figure charges through the fog. You don’t have time to run. <br><br><b>Game Over.</b>", 
+        image: "assets/leatherface.png", 
         choices: [], 
         isGameOver: true 
     },
     spellBook: {
-        description: "An aged, leather-bound spellbook sits on a stone pedestal, its pages covered in indecipherable symbols. The air crackles with dark energy. Do you dare open it?",
-        image: "path1D.jpg",
+        description: "An aged, leather-bound spellbook sits on a stone pedestal, its pages covered in indecipherable symbols. The air crackles with dark energy. <br><br><b>Do you dare open it?</b>",
+        image: "assets/spellBook.png",
         choices: [
             { text: "Turn away from the book", nextScene: "trapDoor" },
             { text: "Read the forbidden text", nextScene: "regan" }
         ]
     },
     regan: { 
-        description: "A violent force slams into you, pinning you against the trees. You feel your body contort in unnatural ways as an unholy presence takes over. Game Over.", 
-        image: "path1C1.jpg", 
+        description: "A violent force slams into you, pinning you against the trees. You feel your body contort in unnatural ways as an unholy presence takes over. <br><br><b>Game Over.</b>", 
+        image: "assets/regan.png", 
         choices: [], 
         isGameOver: true 
     },
     trapDoor: {
-        description: "Half-buried in the dirt is a rusted trap door. Faint scratching sounds echo from below. The handle is slick with something wet. Will you descend?",
-        image: "path1D.jpg",
+        description: "Half-buried in the dirt is a rusted trap door. Faint scratching sounds echo from below. The handle is slick with something wet. <br><br><b>Will you descend?</b>",
+        image: "assets/trapDoor.png",
         choices: [
             { text: "Climb down into the darkness", nextScene: "evilBook" },
             { text: "Walk past it and keep moving", nextScene: "pennywise" }
         ]
     },
     pennywise: { 
-        description: "A red balloon drifts toward you. Before you can react, a clawed hand drags you into the darkness. Game Over.", 
-        image: "path1C1.jpg", 
+        description: "A red balloon drifts toward you. Before you can react, a clawed hand drags you into the darkness. <br><br><b>Game Over.</b>", 
+        image: "assets/pennywise.png", 
         choices: [], 
         isGameOver: true 
     },
     success: {
-        description: "The dense forest fades behind you as the trees give way to an open path. In the distance, the faint glow of a nearby town guides your way. You’ve made it out of the woods, for now...",
-        image: "success.jpg",
+        description: "The dense forest fades behind you as the trees give way to an open path. In the distance, the faint glow of a nearby town guides your way. <br><br><b>You’ve made it out of the woods, for now...</b>",
+        image: "assets/town.png",
         choices: [],
         isSuccess: true
     }
 };
 
         
-        function renderScene() {
-            const sceneData = scenes[gameState.currentScene];
-            document.getElementById("scene-description").textContent = sceneData.description;
-            document.getElementById("scene-image").src = sceneData.image;
-            const choicesContainer = document.getElementById("choices");
-            choicesContainer.innerHTML = "";
-            
-            if (sceneData.isGameOver) {
-                renderGameOver();
-                return;
-            }
-            
-            if (sceneData.isSuccess) {
-                renderSuccess();
-                return;
-            }
-            
-            sceneData.choices.forEach(choice => {
-                const button = document.createElement("button");
-                button.className = "choice-btn";
-                button.textContent = choice.text;
-                button.onclick = () => makeChoice(choice.nextScene);
-                choicesContainer.appendChild(button);
-            });
-        }
+function renderScene() {
+    const sceneData = scenes[gameState.currentScene];
+    const sceneDescription = document.getElementById("scene-description");
+
+    // Remove previous styles to avoid carryover
+    sceneDescription.classList.remove("game-over-text", "success-text");
+
+    sceneDescription.innerHTML = sceneData.description; 
+    document.getElementById("scene-image").src = sceneData.image;
+
+    const choicesContainer = document.getElementById("choices");
+    choicesContainer.innerHTML = "";
+
+    if (sceneData.isGameOver) {
+        renderGameOver();
+        return;
+    }
+
+    if (sceneData.isSuccess) {
+        renderSuccess();
+        return;
+    }
+
+    sceneData.choices.forEach(choice => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = choice.text;
+        button.onclick = () => makeChoice(choice.nextScene);
+        choicesContainer.appendChild(button);
+    });
+}
+
+
         
-        function renderGameOver() {
-            const choicesContainer = document.getElementById("choices");
-            const restartButton = document.createElement("button");
-            restartButton.className = "restart-btn";
-            restartButton.textContent = "Restart Game";
-            restartButton.onclick = restartGame;
-            choicesContainer.appendChild(restartButton);
-        }
+    function renderGameOver() {
+    const choicesContainer = document.getElementById("choices");
+    choicesContainer.innerHTML = ""; // Clear previous choices
+
+    const sceneDescription = document.getElementById("scene-description");
+    sceneDescription.classList.add("game-over-text"); // Apply red text style
+
+    const restartButton = document.createElement("button");
+    restartButton.className = "game-over-btn"; // Apply red button style
+    restartButton.textContent = "Restart Game";
+    restartButton.onclick = restartGame;
+
+    choicesContainer.appendChild(restartButton);
+}
+
         
-        function renderSuccess() {
-            const choicesContainer = document.getElementById("choices");
-            const successElement = document.createElement("div");
-            successElement.className = "success";
-            
-            const restartButton = document.createElement("button");
-            restartButton.className = "restart-btn";
-            restartButton.textContent = "Play Again";
-            restartButton.onclick = restartGame;
-            
-            choicesContainer.appendChild(successElement);
-            choicesContainer.appendChild(restartButton);
-        }
+function renderSuccess() {
+    const choicesContainer = document.getElementById("choices");
+    choicesContainer.innerHTML = ""; // Clear previous choices
+
+    const sceneDescription = document.getElementById("scene-description");
+    sceneDescription.classList.add("success-text"); // Apply green text style
+
+    const restartButton = document.createElement("button");
+    restartButton.className = "success-btn"; // Apply green button style
+    restartButton.textContent = "Play Again";
+    restartButton.onclick = restartGame;
+
+    choicesContainer.appendChild(restartButton);
+}
+
         
         function makeChoice(nextScene) {
             gameState.currentScene = nextScene;
