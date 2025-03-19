@@ -132,6 +132,31 @@
         </div>
     </div>
     <script>
+
+    function preloadImages(imageArray) {
+        imageArray.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+
+    // Preload all scene images
+    const sceneImages = [
+    "start.jpg",
+    "path1.jpg",
+    "path1A.jpg",
+    "path1B.jpg",
+    "path1B1.jpg",
+    "path1B2.jpg",
+    "path1B2A.jpg",
+    "path1C.jpg",
+    "path1C1.jpg",
+    "path1D.jpg",
+    "success.jpg"
+    ];
+
+    preloadImages(sceneImages);
+
         const gameState = {
             currentScene: "start"
         };
