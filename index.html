@@ -117,6 +117,43 @@
         background-color: #1a7540;
     }
 
+    @media (max-width: 768px) {
+    .scene-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .scene-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .scene-content {
+        width: 100%;
+    }
+
+    /* Adjust text size for better readability on mobile */
+    .scene-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .choice-btn {
+        font-size: 0.85rem;
+        padding: 10px 18px;
+    }
+
+    .game-over-text, .success-text {
+        font-size: 0.9rem;
+    }
+
+    .game-over-btn, .success-btn {
+        font-size: 0.85rem;
+        padding: 10px 18px;
+    }
+}
+
 
     </style>
 </head>
